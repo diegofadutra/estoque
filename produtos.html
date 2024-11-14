@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lista de Produtos - Gerenciamento de Estoque">
+    <title>Lista de Produtos</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/produtos.css">
+</head>
+<body>
+    <a href="#mainContent" class="skip-link">Pular para o conteúdo principal</a>
+
+    <header role="banner">
+        <div class="logo" role="heading" aria-level="1">
+            Gerenciamento de Estoque
+        </div>
+        <div class="user-info">
+            <span class="user-name" id="userNameDisplay" role="status" aria-label="Usuário atual">Nome do Usuário</span>
+            <button class="logout-btn" onclick="logout()" aria-label="Sair do sistema">Sair</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar" role="navigation" aria-label="Menu principal">
+            <button class="menu-button" data-section="vendas" aria-label="Seção de Vendas">
+                <span aria-hidden="true">💰</span> 
+                <span>Vendas</span>
+            </button>
+            <button class="menu-button" data-section="compras" aria-label="Seção de Compras">
+                <span aria-hidden="true">🛍️</span> 
+                <span>Compras</span>
+            </button>
+            <button class="menu-button active" data-section="produtos" aria-label="Lista de Produtos">
+                <span aria-hidden="true">📦</span> 
+                <span>Lista de Produtos</span>
+            </button>
+            <button class="menu-button" data-section="clientes" aria-label="Seção de Clientes">
+                <span aria-hidden="true">👥</span> 
+                <span>Clientes</span>
+            </button>
+            <button class="menu-button" data-section="usuarios" aria-label="Seção de Usuários">
+                <span aria-hidden="true">👤</span> 
+                <span>Usuários</span>
+            </button>
+        </nav>
+
+        <main class="content" id="mainContent" role="main">
+            <section class="produtos-section">
+                <h2>Inventário Atual</h2>
+                <div class="table-container">
+                    <table id="tabelaProdutos" class="produtos-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome do Produto</th>
+                                <th>Quantidade</th>
+                                <th>Valor Unitário (R$)</th>
+                                <th>Valor Total (R$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Itens serão adicionados aqui via JavaScript -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4">Total em Estoque:</td>
+                                <td id="totalEstoque">R$ 0.00</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/index.js"></script>
+    <script src="js/produtos.js"></script>
+</body>
+</html>
