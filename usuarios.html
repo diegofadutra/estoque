@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de Gerenciamento de Estoque - Usuários">
+    <title>Gerenciamento de Estoque - Usuários</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/usuarios.css">
+</head>
+<body>
+    <a href="#mainContent" class="skip-link">Pular para o conteúdo principal</a>
+    
+    <header role="banner">
+        <div class="logo" role="heading" aria-level="1">
+            Gerenciamento de Estoque
+        </div>
+        <div class="user-info">
+            <span class="user-name" id="userNameDisplay" role="status" aria-label="Usuário atual">Nome do Usuário</span>
+            <button 
+                class="logout-btn" 
+                onclick="logout()" 
+                aria-label="Sair do sistema"
+                role="button">
+                Sair
+            </button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar" role="navigation" aria-label="Menu principal">
+            <a href="vendas.html" class="menu-button" aria-label="Seção de Vendas">
+                <span aria-hidden="true">💰</span> 
+                <span>Vendas</span>
+            </a>
+            <a href="compras.html" class="menu-button" aria-label="Seção de Compras">
+                <span aria-hidden="true">🛍️</span> 
+                <span>Compras</span>
+            </a>
+            <a href="produtos.html" class="menu-button" aria-label="Lista de Produtos">
+                <span aria-hidden="true">📦</span> 
+                <span>Lista de Produtos</span>
+            </a>
+            <a href="clientes.html" class="menu-button" aria-label="Seção de Clientes">
+                <span aria-hidden="true">👥</span> 
+                <span>Clientes</span>
+            </a>
+            <a href="usuarios.html" class="menu-button active" aria-label="Seção de Usuários">
+                <span aria-hidden="true">👤</span> 
+                <span>Usuários</span>
+            </a>
+        </nav>
+
+        <main class="content" id="mainContent" role="main" aria-live="polite">
+            <section class="usuarios-section">
+                <h2>Gerenciamento de Usuários</h2>
+                <div class="menu-usuarios">
+                    <button id="btnCadastro" class="btn btn-primary">Cadastrar Novo Usuário</button>
+                    <button id="btnConsulta" class="btn btn-secondary">Consultar Usuários</button>
+                </div>
+                <div id="cadastroSection" class="section hidden">
+                    <h3>Cadastrar Novo Usuário</h3>
+                    <form id="formCadastro" class="usuario-form">
+                        <div class="form-group">
+                            <label for="nome">Nome:</label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login">Login:</label>
+                            <input type="text" id="login" name="login" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="senha">Senha:</label>
+                            <input type="password" id="senha" name="senha" required pattern="\d{6}" title="A senha deve conter 6 números">
+                        </div>
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                    </form>
+                </div>
+                <div id="consultaSection" class="section hidden">
+                    <h3>Usuários Cadastrados</h3>
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Login</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Usuários serão carregados aqui via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Área para mensagens de notificação -->
+    <div id="notifications" role="alert" aria-live="polite" class="notifications"></div>
+
+    <!-- Incluindo o script JavaScript -->
+    <script src="js/index.js"></script>
+    <script src="js/usuarios.js"></script>
+</body>
+</html>

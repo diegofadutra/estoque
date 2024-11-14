@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página de login do sistema de Gerenciamento de Estoque">
+    <title>Gerenciamento de Estoque - Login</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gerenciamento de Estoque</h1>
+        <p>Bem-vindo! Por favor, faça login.</p>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required autocomplete="username" aria-required="true">
+            </div>
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password" aria-required="true">
+            </div>
+            <button type="submit" id="submitButton">Entrar</button>
+        </form>
+
+        <div id="loadingMessage" class="loading" role="status">Verificando credenciais...</div>
+        <div id="errorMessage" class="message error" role="alert">Usuário e/ou senha incorretos. Por favor, tente novamente.</div>
+        <div id="successMessage" class="message success" role="alert">Login realizado com sucesso! Redirecionando...</div>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de Gerenciamento de Estoque - Controle suas vendas, compras, produtos, clientes e usuários">
+    <title>Gerenciamento de Estoque - Sistema</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <a href="#mainContent" class="skip-link">Pular para o conteúdo principal</a>
+    
+    <header role="banner">
+        <div class="logo" role="heading" aria-level="1">
+            Gerenciamento de Estoque
+        </div>
+        <div class="user-info">
+            <span class="user-name" id="userNameDisplay" role="status" aria-label="Usuário atual">Nome do Usuário</span>
+            <button 
+                class="logout-btn" 
+                onclick="logout()" 
+                aria-label="Sair do sistema"
+                role="button">
+                Sair
+            </button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar" role="navigation" aria-label="Menu principal">
+            <a href="vendas.html" class="menu-button" aria-label="Seção de Vendas">
+                <span aria-hidden="true">💰</span> 
+                <span>Vendas</span>
+            </a>
+            <a href="compras.html" class="menu-button" aria-label="Seção de Compras">
+                <span aria-hidden="true">🛍️</span> 
+                <span>Compras</span>
+            </a>
+            <a href="produtos.html" class="menu-button" aria-label="Lista de Produtos">
+                <span aria-hidden="true">📦</span> 
+                <span>Lista de Produtos</span>
+            </a>
+            <a href="clientes.html" class="menu-button" aria-label="Seção de Clientes">
+                <span aria-hidden="true">👥</span> 
+                <span>Clientes</span>
+            </a>
+            <a href="usuarios.html" class="menu-button" aria-label="Seção de Usuários">
+                <span aria-hidden="true">👤</span> 
+                <span>Usuários</span>
+            </a>
+        </nav>
+
+        <main class="content" id="mainContent" role="main" aria-live="polite">
+            <div class="welcome-message">
+                <h2>Bem-vindo ao Sistema de Gerenciamento de Estoque</h2>
+                <p>Selecione uma opção no menu para começar</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Área para mensagens de notificação -->
+    <div id="notifications" role="alert" aria-live="polite" class="notifications"></div>
+
+    <!-- Incluindo o script JavaScript -->
+    <script src="js/index.js"></script>
+</body>
+</html>

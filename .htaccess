@@ -1,0 +1,2 @@
+# Configura a página de login como a página inicial
+DirectoryIndex login.html
