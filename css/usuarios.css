@@ -73,22 +73,6 @@ header {
     font-size: 1rem;
 }
 
-/* Botões */
-.logout-btn {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.logout-btn:hover,
-.logout-btn:focus {
-    background-color: #c0392b;
-}
-
 /* Container Principal */
 .main-container {
     display: flex;
