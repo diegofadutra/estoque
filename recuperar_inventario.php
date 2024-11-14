@@ -1,5 +1,5 @@
 <?php
-include 'db_connection.php';
+include 'php/db_connection.php';
 
 try {
     // Recuperar dados do inventário

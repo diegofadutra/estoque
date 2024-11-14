@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de Gerenciamento de Estoque - Registro de Vendas">
+    <title>Gerenciamento de Estoque - Vendas</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/vendas.css">
+</head>
+<body>
+    <a href="#mainContent" class="skip-link">Pular para o conteúdo principal</a>
+    
+    <header role="banner">
+        <div class="logo" role="heading" aria-level="1">
+            Gerenciamento de Estoque
+        </div>
+        <div class="user-info">
+            <span class="user-name" id="userNameDisplay" role="status" aria-label="Usuário atual">Nome do Usuário</span>
+            <button class="logout-btn" onclick="logout()" aria-label="Sair do sistema">Sair</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Menu lateral - mesmo do index.html -->
+        <nav class="sidebar" role="navigation" aria-label="Menu principal">
+            <button class="menu-button active" data-section="vendas" aria-label="Seção de Vendas">
+                <span aria-hidden="true">💰</span> 
+                <span>Vendas</span>
+            </button>
+            <button class="menu-button" data-section="compras" aria-label="Seção de Compras">
+                <span aria-hidden="true">🛍️</span> 
+                <span>Compras</span>
+            </button>
+            <button class="menu-button" data-section="produtos" aria-label="Lista de Produtos">
+                <span aria-hidden="true">📦</span> 
+                <span>Lista de Produtos</span>
+            </button>
+            <button class="menu-button" data-section="clientes" aria-label="Seção de Clientes">
+                <span aria-hidden="true">👥</span> 
+                <span>Clientes</span>
+            </button>
+            <button class="menu-button" data-section="usuarios" aria-label="Seção de Usuários">
+                <span aria-hidden="true">👤</span> 
+                <span>Usuários</span>
+            </button>
+        </nav>
+
+        <main class="content" id="mainContent" role="main">
+            <section class="vendas-section">
+                <h2>Registro de Vendas</h2>
+                
+                <form id="formVenda" class="venda-form">
+                    <div class="form-group">
+                        <label for="produtoSelecionado">Produto:</label>
+                        <select id="produtoSelecionado" name="produtoSelecionado" required aria-required="true" onchange="atualizarDetalhesProduto()">
+                            <option value="">Selecione um produto</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantidade">Quantidade:</label>
+                        <input 
+                            type="number" 
+                            id="quantidade" 
+                            name="quantidade" 
+                            min="1" 
+                            required 
+                            aria-required="true">
+                        <small id="quantidadeDisponivel" class="text-muted"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="valorVenda">Valor de Venda (R$):</label>
+                        <input 
+                            type="number" 
+                            id="valorVenda" 
+                            name="valorVenda" 
+                            min="0.01" 
+                            step="0.01" 
+                            required 
+                            aria-required="true" 
+                            readonly>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Adicionar Item</button>
+                    </div>
+                </form>
+
+                <div class="table-container">
+                    <table id="tabelaVendas" class="vendas-table">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Valor Unitário</th>
+                                <th>Valor Total</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Itens serão adicionados aqui via JavaScript -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">Total da Venda:</td>
+                                <td id="totalVenda">R$ 0,00</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="finalizar-container">
+                    <button id="btnFinalizarVenda" class="btn btn-success" disabled>
+                        Finalizar Venda
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div id="modalConfirmacao" class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-content">
+            <h3 id="modalTitle">Confirmar Venda</h3>
+            <p>Deseja finalizar esta venda?</p>
+            <div class="modal-actions">
+                <button id="btnConfirmarVenda" class="btn btn-success">Confirmar</button>
+                <button id="btnCancelarVenda" class="btn btn-danger">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Área para notificações -->
+    <div id="notifications" role="alert" aria-live="polite" class="notifications"></div>
+
+    <script src="js/index.js"></script>
+    <script src="js/vendas.js"></script>
+</body>
+</html>
