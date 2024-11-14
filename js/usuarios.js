@@ -8,7 +8,52 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('formCadastro').addEventListener('submit', cadastrarUsuario);
 });
 
+function checkAuthentication() {
+    const loggedUserName = getCookie('loggedUserName');
+    const loggedUserLogin = getCookie('loggedUserLogin');
+
+    if (!loggedUserName || !loggedUserLogin) {
+        showNotification('Sessão expirada. Redirecionando para a página de login...', 'error');
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 2000);
+        return;
+    }
+
+    // Atualiza o nome do usuário na interface
+    document.getElementById('userNameDisplay').textContent = loggedUserName;
+}
+
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function checkAdminPrivileges() {
+    const loggedUserLogin = getCookie('loggedUserLogin');
+    console.log('Login do usuário atual:', loggedUserLogin); // Adicionado para debugging
+    return loggedUserLogin === 'admin'; // Verificar se o login do usuário é "admin"
+}
+
 function showCadastroSection() {
+    if (!checkAdminPrivileges()) {
+        showNotification('Acesso negado. Apenas administradores podem cadastrar novos usuários.', 'error');
+        return;
+    }
+
     document.getElementById('cadastroSection').classList.remove('hidden');
     document.getElementById('consultaSection').classList.add('hidden');
 }
@@ -57,7 +102,7 @@ function carregarUsuarios() {
             const tbody = document.querySelector('.users-table tbody');
             tbody.innerHTML = ''; // Limpar tabela antes de adicionar novos dados
 
-            const loggedUser = localStorage.getItem('loggedUser');
+            const loggedUserLogin = getCookie('loggedUserLogin');
 
             data.forEach((usuario, index) => {
                 const tr = document.createElement('tr');
@@ -65,8 +110,8 @@ function carregarUsuarios() {
                     <td>${usuario.nome}</td>
                     <td>${usuario.login}</td>
                     <td>
-                        ${usuario.login !== 'admin' ? `<button class="btn btn-danger" onclick="confirmarExclusaoUsuario(${usuario.id})">Excluir</button>` : ''}
-                        ${usuario.login === loggedUser ? `<button class="btn btn-warning" onclick="mostrarPopupAlteracaoSenha('${usuario.login}')">Alterar Senha</button>` : ''}
+                        ${checkAdminPrivileges() && usuario.login !== 'admin' ? `<button class="btn btn-danger" onclick="confirmarExclusaoUsuario(${usuario.id})">Excluir</button>` : ''}
+                        ${usuario.login === loggedUserLogin ? `<button class="btn btn-warning" onclick="mostrarPopupAlteracaoSenha('${usuario.login}')">Alterar Senha</button>` : ''}
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -165,4 +210,35 @@ function alterarSenha(event) {
         }
     })
     .catch(error => console.error('Erro ao alterar senha:', error));
+}
+
+function showNotification(message, type = 'info') {
+    const notifications = document.getElementById('notifications');
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    
+    notifications.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 5000);
+}
+
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
 }

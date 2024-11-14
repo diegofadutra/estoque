@@ -47,6 +47,7 @@ if ($user['status'] !== 'ativo') {
 if (password_verify($password, $user['senha'])) {
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['username'] = $user['nome'];
+    $_SESSION['login'] = $user['login']; // Adicionar o login à sessão
     send_json_response("sucesso", "Login realizado com sucesso! Redirecionando...", $user['nome']);
 } else {
     send_json_response("erro", "Senha incorreta.");

@@ -4,7 +4,7 @@ include 'db_connection.php';
 $data = json_decode(file_get_contents('php://input'), true);
 $nome = $data['nome'];
 $login = $data['login'];
-$senha = password_hash($data['senha'], PASSWORD_DEFAULT); // Hash da senha
+$senha = password_hash($data['senha'], PASSWORD_DEFAULT); // Hashing a senha
 
 $sql = "SELECT id FROM usuarios WHERE login = ?";
 $stmt = $conn->prepare($sql);
